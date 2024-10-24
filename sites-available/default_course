@@ -1,0 +1,14 @@
+server {
+  listen 9000 default_server;
+  server_name  _;
+  root /usr/share/nginx/html;
+
+  location = /admin.html {
+    auth_basic "Login required!";
+    auth_basic_user_file /etc/nginx/.htpasswd;
+  }
+
+  error_page 404 /404.html;
+  error_page 500 501 502 503 504 /50x.html;
+
+} 
