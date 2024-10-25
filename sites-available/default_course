@@ -1,5 +1,10 @@
 server {
-  listen 9000 default_server;
+  listen 9000;
+  server_name _;
+  return 301 https://$host:9443$request_uri;
+}
+
+server {
   listen 9443 ssl;
   server_name  _;
   root /usr/share/nginx/html;
@@ -7,9 +12,17 @@ server {
   ssl_certificate /etc/nginx/ssl/public.pem;
   ssl_certificate_key /etc/nginx/ssl/private.key;
 
-  location = /admin.html {
+  rewrite ^(/.*)\.html(\?.*)?$ $1$2 redirect;
+  rewrite ^/(.*)/$ /$1 redirect;
+
+  location / {
+    try_files $uri/index.html $uri.html $uri/ $uri =404;
+  }
+
+  location = /admin {
     auth_basic "Login required!";
     auth_basic_user_file /etc/nginx/.htpasswd;
+    try_files $uri/index.html $uri.html $uri/ $uri =404;
   }
 
   error_page 404 /404.html;
