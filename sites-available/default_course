@@ -9,6 +9,9 @@ server {
   server_name  _;
   root /usr/share/nginx/html;
 
+  modsecurity on;
+  modsecurity_rules_file /etc/nginx/modsecurity/modsecurity.conf;
+
   ssl_certificate /etc/nginx/ssl/public.pem;
   ssl_certificate_key /etc/nginx/ssl/private.key;
 
