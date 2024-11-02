@@ -19,6 +19,8 @@ server {
 
   client_max_body_size 5m;
 
+  access_log syslog:server=unix:/dev/log vhost;
+
   location / {
     proxy_pass http://127.0.0.1:3000;
     proxy_http_version 1.1;
