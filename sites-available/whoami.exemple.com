@@ -8,9 +8,9 @@ server {
 }
 
 upstream whoami {
-  server whoami.ddnsking.com:8000 weight=2;
-  server whoami.ddnsking.com:8001 max_fails=3 fail_timeout=20s;
-  server whoami.ddnsking.com:8002 max_fails=3 fail_timeout=20s;
+  server myphotos.zapto.org:8000 weight=2;
+  server myphotos.zapto.org:8001 max_fails=3 fail_timeout=20s;
+  server myphotos.zapto.org:8002 max_fails=3 fail_timeout=20s;
 }
 
 server {
